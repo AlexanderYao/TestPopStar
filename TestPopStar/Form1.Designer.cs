@@ -39,6 +39,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusToolStrip = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.scoreToolStrip = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -83,7 +84,7 @@
             // 
             this.smallTsmi.CheckOnClick = true;
             this.smallTsmi.Name = "smallTsmi";
-            this.smallTsmi.Size = new System.Drawing.Size(152, 22);
+            this.smallTsmi.Size = new System.Drawing.Size(113, 22);
             this.smallTsmi.Text = "Small";
             this.smallTsmi.Click += new System.EventHandler(this.sizeTsmi_Click);
             // 
@@ -93,7 +94,7 @@
             this.middleTsmi.CheckOnClick = true;
             this.middleTsmi.CheckState = System.Windows.Forms.CheckState.Checked;
             this.middleTsmi.Name = "middleTsmi";
-            this.middleTsmi.Size = new System.Drawing.Size(152, 22);
+            this.middleTsmi.Size = new System.Drawing.Size(113, 22);
             this.middleTsmi.Text = "Middle";
             this.middleTsmi.Click += new System.EventHandler(this.sizeTsmi_Click);
             // 
@@ -101,7 +102,7 @@
             // 
             this.largeTsmi.CheckOnClick = true;
             this.largeTsmi.Name = "largeTsmi";
-            this.largeTsmi.Size = new System.Drawing.Size(152, 22);
+            this.largeTsmi.Size = new System.Drawing.Size(113, 22);
             this.largeTsmi.Text = "Large";
             this.largeTsmi.Click += new System.EventHandler(this.sizeTsmi_Click);
             // 
@@ -115,7 +116,8 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusToolStrip});
+            this.statusToolStrip,
+            this.scoreToolStrip});
             this.statusStrip1.Location = new System.Drawing.Point(0, 392);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(543, 22);
@@ -124,9 +126,11 @@
             // 
             // statusToolStrip
             // 
+            this.statusToolStrip.AutoSize = false;
             this.statusToolStrip.Name = "statusToolStrip";
-            this.statusToolStrip.Size = new System.Drawing.Size(128, 17);
+            this.statusToolStrip.Size = new System.Drawing.Size(150, 17);
             this.statusToolStrip.Text = "New Game Started...";
+            this.statusToolStrip.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel1
             // 
@@ -135,6 +139,13 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(543, 368);
             this.panel1.TabIndex = 2;
+            // 
+            // scoreToolStrip
+            // 
+            this.scoreToolStrip.AutoSize = false;
+            this.scoreToolStrip.Name = "scoreToolStrip";
+            this.scoreToolStrip.Size = new System.Drawing.Size(150, 17);
+            this.scoreToolStrip.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 
@@ -169,6 +180,7 @@
         private System.Windows.Forms.ToolStripMenuItem smallTsmi;
         private System.Windows.Forms.ToolStripMenuItem middleTsmi;
         private System.Windows.Forms.ToolStripMenuItem largeTsmi;
+        private System.Windows.Forms.ToolStripStatusLabel scoreToolStrip;
     }
 }
 

@@ -25,7 +25,7 @@ namespace PopStar
             get { return source; }
             set { source = value; }
         }
-        
+
         public Game()
         {
             size = 10;
@@ -34,9 +34,81 @@ namespace PopStar
             {
                 for (int j = 0; j < size; j++)
                 {
-                    source[i, j] = new Star(colors[rand.Next(colors.Length)]);
+                    source[i, j] = new Star(colors[rand.Next(colors.Length)], i, j);
                 }
             }
+        }
+
+        public List<Star> FindNeighbour(Star star)
+        {
+            List<Star> result = new List<Star>();
+            Stack<Star> stack = new Stack<Star>();
+            List<Star> tracked = new List<Star>();
+
+            stack.Push(star);
+            while (stack.Count > 0)
+            {
+                Star item = stack.Pop();
+                if (!result.Contains(item))
+                {
+                    result.Add(item);
+                }
+                if (!tracked.Contains(item))
+                {
+                    tracked.Add(item);
+                }                
+
+                //上
+                if (item.X > 0)
+	            {
+                    Star up = source[item.X - 1, item.Y];
+                    if (up != null && !tracked.Contains(up) && up.Color == item.Color)
+	                {
+		                stack.Push(up);
+	                }
+	            }
+                //下
+                if (item.X < size - 1)
+                {
+                    Star down = source[item.X + 1, item.Y];
+                    if (down != null && !tracked.Contains(down) && down.Color == item.Color)
+                    {
+                        stack.Push(down);
+                    }
+                }
+                //左
+                if (item.Y > 0)
+                {
+                    Star left = source[item.X, item.Y - 1];
+                    if (left != null && !tracked.Contains(left) && left.Color == item.Color)
+                    {
+                        stack.Push(left);
+                    }
+                }
+                //右
+                if (item.Y < size - 1)
+                {
+                    Star right = source[item.X, item.Y + 1];
+                    if (right != null && !tracked.Contains(right) && right.Color == item.Color)
+                    {
+                        stack.Push(right);
+                    }
+                }
+            }
+            return result;
+        }
+
+        public int CalculateScore(int selected)
+        {
+            if (selected <= 1)
+            {
+                return 0;
+            }
+            else
+            {
+                int multi = 10 + 5 * (selected - 2);
+                return multi * selected;
+            }            
         }
     }
 }

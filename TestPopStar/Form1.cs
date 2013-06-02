@@ -28,21 +28,58 @@ namespace TestPopStar
             size = game.Size;
             buttons = new Button[size, size];
             panel1.Controls.Clear();
-            
+
             Star[,] stars = game.Source;
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
-                    Button b = new Button();
+                    Button b = new ButtonEx();
                     b.BackColor = stars[i, j].Color;
+                    b.FlatAppearance.BorderColor = Color.White;
+                    b.FlatAppearance.BorderSize = 2;
                     b.Parent = panel1;
                     b.Tag = stars[i, j];
+                    b.Click += new EventHandler(b_Click);
+                    b.DoubleClick += new EventHandler(b_DoubleClick);
                     buttons[i, j] = b;
                 }
             }
 
             JustifySize();
+            statusToolStrip.Text = "新的一局~~好运！";
+        }
+
+        private void b_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    if (buttons[i, j] == null)
+                    {
+                        continue;
+                    }
+                    buttons[i, j].FlatStyle = FlatStyle.Standard;
+                }
+            }
+            Button current = sender as Button;
+            List<Star> neighbour = game.FindNeighbour(current.Tag as Star);
+            foreach (Star star in neighbour)
+            {
+                if (buttons[star.X, star.Y] == null)
+                {
+                    throw new ArgumentException("FindNeighbour中返回的数据与界面不匹配");
+                }
+                buttons[star.X, star.Y].FlatStyle = FlatStyle.Flat;
+            }
+            int score = game.CalculateScore(neighbour.Count);
+            statusToolStrip.Text = string.Format("选中{0}个,{1}分", neighbour.Count, score);
+        }
+
+        private void b_DoubleClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void JustifySize()
@@ -59,12 +96,12 @@ namespace TestPopStar
             {
                 for (int j = 0; j < size; j++)
                 {
-                    if (buttons[i,j] == null)
+                    if (buttons[i, j] == null)
                     {
                         continue;
                     }
                     buttons[i, j].Size = new Size(height, height);
-                    buttons[i, j].Location = new Point(i * height, j * height);
+                    buttons[i, j].Location = new Point(j * height, i * height);
                 }
             }
         }
