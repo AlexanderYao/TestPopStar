@@ -26,8 +26,16 @@ namespace PopStar
             set { source = value; }
         }
 
+        private int score;
+        public int Score
+        {
+            get { return score; }
+            set { score = value; }
+        }
+
         public Game()
         {
+            score = 0;
             size = 10;
             source = new Star[size, size];
             for (int i = 0; i < size; i++)
@@ -109,6 +117,15 @@ namespace PopStar
                 int multi = 10 + 5 * (selected - 2);
                 return multi * selected;
             }            
+        }
+
+        public void Remove(List<Star> neighbour)
+        {
+            score += CalculateScore(neighbour.Count);
+            foreach (Star star in neighbour)
+            {
+                source[star.X, star.Y] = null;
+            }
         }
     }
 }

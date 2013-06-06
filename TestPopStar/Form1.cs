@@ -79,7 +79,23 @@ namespace TestPopStar
 
         private void b_DoubleClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Button current = sender as Button;
+            List<Star> neighbour = game.FindNeighbour(current.Tag as Star);
+            if (neighbour.Count < 2)
+            {
+                return;
+            }
+            game.Remove(neighbour);
+            foreach (Star star in neighbour)
+            {
+                if (buttons[star.X, star.Y] == null)
+                {
+                    throw new ArgumentException("FindNeighbour中返回的数据与界面不匹配");
+                }
+                panel1.Controls.Remove(buttons[star.X, star.Y]);
+                buttons[star.X, star.Y] = null;
+            }
+            scoreToolStrip.Text = string.Format("总分：{0}", game.Score);
         }
 
         private void JustifySize()
