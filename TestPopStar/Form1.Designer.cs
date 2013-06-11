@@ -38,8 +38,8 @@
             this.exitTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusToolStrip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.scoreToolStrip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -132,6 +132,13 @@
             this.statusToolStrip.Text = "New Game Started...";
             this.statusToolStrip.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // scoreToolStrip
+            // 
+            this.scoreToolStrip.AutoSize = false;
+            this.scoreToolStrip.Name = "scoreToolStrip";
+            this.scoreToolStrip.Size = new System.Drawing.Size(150, 17);
+            this.scoreToolStrip.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -139,13 +146,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(543, 368);
             this.panel1.TabIndex = 2;
-            // 
-            // scoreToolStrip
-            // 
-            this.scoreToolStrip.AutoSize = false;
-            this.scoreToolStrip.Name = "scoreToolStrip";
-            this.scoreToolStrip.Size = new System.Drawing.Size(150, 17);
-            this.scoreToolStrip.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 
@@ -156,7 +156,10 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Form1";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PopStar";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
