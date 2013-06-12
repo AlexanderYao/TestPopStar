@@ -37,6 +37,7 @@
             this.largeTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.exitTsmi = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.stageToolStrip = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusToolStrip = new System.Windows.Forms.ToolStripStatusLabel();
             this.scoreToolStrip = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -69,6 +70,7 @@
             this.saveResumeTsmi.Name = "saveResumeTsmi";
             this.saveResumeTsmi.Size = new System.Drawing.Size(66, 20);
             this.saveResumeTsmi.Text = "Resume";
+            this.saveResumeTsmi.Visible = false;
             // 
             // sizeToolStripMenuItem
             // 
@@ -116,6 +118,7 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stageToolStrip,
             this.statusToolStrip,
             this.scoreToolStrip});
             this.statusStrip1.Location = new System.Drawing.Point(0, 392);
@@ -124,19 +127,26 @@
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // stageToolStrip
+            // 
+            this.stageToolStrip.AutoSize = false;
+            this.stageToolStrip.Name = "stageToolStrip";
+            this.stageToolStrip.Size = new System.Drawing.Size(100, 17);
+            this.stageToolStrip.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // statusToolStrip
             // 
             this.statusToolStrip.AutoSize = false;
             this.statusToolStrip.Name = "statusToolStrip";
             this.statusToolStrip.Size = new System.Drawing.Size(150, 17);
-            this.statusToolStrip.Text = "New Game Started...";
             this.statusToolStrip.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // scoreToolStrip
             // 
             this.scoreToolStrip.AutoSize = false;
             this.scoreToolStrip.Name = "scoreToolStrip";
-            this.scoreToolStrip.Size = new System.Drawing.Size(150, 17);
+            this.scoreToolStrip.Size = new System.Drawing.Size(247, 17);
+            this.scoreToolStrip.Spring = true;
             this.scoreToolStrip.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel1
@@ -184,6 +194,7 @@
         private System.Windows.Forms.ToolStripMenuItem middleTsmi;
         private System.Windows.Forms.ToolStripMenuItem largeTsmi;
         private System.Windows.Forms.ToolStripStatusLabel scoreToolStrip;
+        private System.Windows.Forms.ToolStripStatusLabel stageToolStrip;
     }
 }
 

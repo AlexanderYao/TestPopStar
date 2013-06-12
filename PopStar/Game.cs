@@ -32,19 +32,45 @@ namespace PopStar
             set { score = value; }
         }
 
-        private int num;
-        public int Num
+        private int scoreTarget;
+        public int ScoreTarget
         {
-            get { return num; }
-            set { num = value; }
+            get { return scoreTarget; }
+            set { scoreTarget = value; }
+        }
+
+        private int topScoreInHistory;
+        public int TopScoreInHistory
+        {
+            get { return topScoreInHistory; }
+            set { topScoreInHistory = value; }
+        }
+
+        private int starCount;
+        public int StarCount
+        {
+            get { return starCount; }
+            set { starCount = value; }
+        }
+
+        private int stage;
+        public int Stage
+        {
+            get { return stage; }
+            private set
+            {
+                stage = value;
+                ScoreTarget = value <= 10 ? 2000 * value : 20000 + 3000 * (value - 10);
+            }
         }
 
         public Game()
         {
             score = 0;
             size = 10;
-            num = size * size;
-            source = new List<Star>(num);
+            Stage = 1;
+            starCount = size * size;
+            source = new List<Star>(starCount);
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
@@ -124,7 +150,7 @@ namespace PopStar
 
         public void Remove(List<Star> neighbour)
         {
-            num -= neighbour.Count;
+            starCount -= neighbour.Count;
             score += CalculateScore(neighbour.Count);
 
             List<int> fallingDown = new List<int>();
@@ -190,7 +216,56 @@ namespace PopStar
 
             if (end)
             {
+                WinOrNot();
+            }
+        }
 
+        private void WinOrNot()
+        {
+            if (Score >= ScoreTarget)
+            {
+                GoToNextStage();
+            }
+            else
+            {
+                GameEnd();
+            }
+        }
+
+        public event EventHandler NewTopRecord;
+        public event EventHandler GameOver;
+        private void GameEnd()
+        {
+            if (Score>TopScoreInHistory)
+            {
+                // 记录到名人榜
+                if (NewTopRecord!=null)
+                {
+                    NewTopRecord(this, EventArgs.Empty);
+                }
+            }
+
+            if (GameOver!=null)
+            {
+                GameOver(this, EventArgs.Empty);
+            }
+        }
+
+        public event EventHandler NextStage;
+        private void GoToNextStage()
+        {
+            Stage++;            
+            Source.Clear();
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    source.Add(new Star(colors[rand.Next(colors.Length)], i, j));
+                }
+            }
+            if (NextStage!=null)
+            {
+                NextStage(this, EventArgs.Empty);
             }
         }
 

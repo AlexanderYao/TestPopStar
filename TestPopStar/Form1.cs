@@ -27,9 +27,23 @@ namespace TestPopStar
         {
             game = new Game();
             size = game.Size;
-            buttons = new List<Button>(game.Num);
-            panel1.Controls.Clear();
+            buttons = new List<Button>(game.StarCount);
 
+            game.NextStage += new EventHandler(game_NextStage);
+            game.GameOver += new EventHandler(game_GameOver);
+            game_NextStage(null, null);
+        }
+
+        void game_GameOver(object sender, EventArgs e)
+        {
+            MessageBox.Show(string.Format("娟子，游戏结束咯！这次你玩到了第{0}关，休息一下吧？", 
+                game.Stage));
+        }
+
+        void game_NextStage(object sender, EventArgs e)
+        {
+            buttons.Clear();
+            panel1.Controls.Clear();
             foreach (Star star in game.Source)
             {
                 Button b = new ButtonEx();
@@ -42,9 +56,9 @@ namespace TestPopStar
                 b.DoubleClick += new EventHandler(b_DoubleClick);
                 buttons.Add(b);
             }
-
             JustifySize();
-            statusToolStrip.Text = "新的一局~~好运！";
+            stageToolStrip.Text = string.Format("第{0}关:{1}分", game.Stage, game.ScoreTarget);
+            statusToolStrip.Text = game.Stage == 1?"新的一局~~好运！":string.Empty;
             scoreToolStrip.Text = string.Format("总分：{0}", game.Score);
         }
 
