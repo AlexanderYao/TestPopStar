@@ -145,7 +145,7 @@
             // 
             this.scoreToolStrip.AutoSize = false;
             this.scoreToolStrip.Name = "scoreToolStrip";
-            this.scoreToolStrip.Size = new System.Drawing.Size(247, 17);
+            this.scoreToolStrip.Size = new System.Drawing.Size(278, 17);
             this.scoreToolStrip.Spring = true;
             this.scoreToolStrip.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 

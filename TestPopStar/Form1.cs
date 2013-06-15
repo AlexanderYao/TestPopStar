@@ -4,6 +4,7 @@ using PopStar;
 using System.Collections.Generic;
 using System.Drawing;
 using TestPopStar.Properties;
+using System.Media;
 
 namespace TestPopStar
 {
@@ -15,12 +16,29 @@ namespace TestPopStar
         private int border;
         private int size;
 
+        private bool alreadyWin = false;
+        private static string POP = "pop";
+        private static string WIN = "win";
+        private Dictionary<string, SoundPlayer> sounds;
+
         public Form1()
         {
             InitializeComponent();
             height = 40;
             border = 1;
             size = 10;
+
+            sounds = new Dictionary<string, SoundPlayer>();
+            sounds.Add(POP, InitialSound(POP));
+            sounds.Add(WIN, InitialSound(WIN));
+        }
+
+        private SoundPlayer InitialSound(string name)
+        {
+            SoundPlayer sound = new SoundPlayer();
+            sound.SoundLocation = name + ".wav";
+            sound.Load();
+            return sound;
         }
 
         private void startTsmi_Click(object sender, EventArgs e)
@@ -42,6 +60,7 @@ namespace TestPopStar
 
         void game_NextStage(object sender, EventArgs e)
         {
+            alreadyWin = false;
             buttons.Clear();
             panel1.Controls.Clear();
             foreach (Star star in game.Source)
@@ -109,6 +128,16 @@ namespace TestPopStar
             }
             game.Remove(neighbour);
             JustifyLocation();
+            if (game.Score > game.ScoreTarget && alreadyWin == false)
+            {
+                alreadyWin = true;
+                statusToolStrip.Text = "恭喜，过关啦！";
+                sounds[WIN].Play();
+            }
+            else
+            {
+                sounds[POP].Play();
+            }            
             scoreToolStrip.Text = string.Format("总分：{0}", game.Score);
         }
 
